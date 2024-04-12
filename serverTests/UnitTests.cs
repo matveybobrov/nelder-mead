@@ -1,4 +1,4 @@
-// Импортируем пространство имён из файла NelderMead
+// Импортируем пространство имён из файла NelderMead.cs
 // Тесты запускаются сочетанием клавиш Ctrl+R, затем a (вероятно Run All)
 // Проваленные тесты будут выделены красным, а успешные - зелёным
 using NELDER_MEAD;
@@ -9,12 +9,17 @@ namespace Tests
     [TestClass]
     public class NelderMeadTests
     {
+        public Point[] InitialPoints = new Point[3]{
+            new Point(0, 0),
+            new Point(1, 0),
+            new Point(0, 1)
+        };
         // Создаём тест
         [TestMethod]
-        // Назвение метода - описание теста
+        // Название метода - описание теста
         public void NelderMeadResultReturnsCorrectSolution()
         {
-            var result = NelderMead.GetResult();
+            var result = new NelderMead(InitialPoints).GetResult();
             var solution = result.Solution;
             // Проверям координаты решения
             Assert.AreEqual(1, solution.X);
@@ -24,7 +29,7 @@ namespace Tests
         [TestMethod]
         public void ThisTestWillFail()
         {
-            Assert.AreEqual(666, NelderMead.GetResult());
+            Assert.AreEqual(666, new NelderMead(InitialPoints).GetResult());
         }
     }
 }
