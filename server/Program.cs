@@ -5,6 +5,7 @@ using System.Text.Json;
 // Подключаем пространство имён из файла NelderMead.cs для доступа к его классам
 using NELDER_MEAD;
 using HELPERS;
+using System.Numerics;
 
 // Создаём сервер
 var builder = WebApplication.CreateBuilder();
@@ -22,13 +23,10 @@ app.MapGet("/", () => "Nelder-Mead");
 app.MapGet("/result", () => {
     // В дальнейшем дадим возможность пользователю выбирать начальные точки на клиенте,
     // как и начальную функцию
-    var initialPoints = new Point[3]{
-        new Point(0, 0),
-        new Point(1, 0),
-        new Point(0, 1)
-    };
+    var initialPoints = new Simplex(new Point(0, 0), new Point(1, 0), new Point(0, 1));
+
     var result = new NelderMead(initialPoints).GetResult();
-                
+
     // Клиент и сервер обмениваются строками, так что преобразуем объект к строке
     string jsonString = JsonSerializer.Serialize(result);
     return jsonString;
