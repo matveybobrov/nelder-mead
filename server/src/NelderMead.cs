@@ -1,15 +1,15 @@
-// Импортируем типы из соседнего файла
+// РРјРїРѕСЂС‚РёСЂСѓРµРј С‚РёРїС‹ РёР· СЃРѕСЃРµРґРЅРµРіРѕ С„Р°Р№Р»Р°
 using HELPERS;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace NELDER_MEAD {
-    // Пока что работаем с функцией f(x,y) = x^2+xy+y^2-6x-9y
-    // потом рассмотрим варианты пользовательских функций
+    // РџРѕРєР° С‡С‚Рѕ СЂР°Р±РѕС‚Р°РµРј СЃ С„СѓРЅРєС†РёРµР№ f(x,y) = x^2+xy+y^2-6x-9y
+    // РїРѕС‚РѕРј СЂР°СЃСЃРјРѕС‚СЂРёРј РІР°СЂРёР°РЅС‚С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёС… С„СѓРЅРєС†РёР№
 
-    // Ожидается, что в результате работы метода вернутся координаты финального решения,
-    // а также список шагов. Один шаг представляется массивом из трёх точек
+    // РћР¶РёРґР°РµС‚СЃСЏ, С‡С‚Рѕ РІ СЂРµР·СѓР»СЊС‚Р°С‚Рµ СЂР°Р±РѕС‚С‹ РјРµС‚РѕРґР° РІРµСЂРЅСѓС‚СЃСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ С„РёРЅР°Р»СЊРЅРѕРіРѕ СЂРµС€РµРЅРёСЏ,
+    // Р° С‚Р°РєР¶Рµ СЃРїРёСЃРѕРє С€Р°РіРѕРІ. РћРґРёРЅ С€Р°Рі РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚СЃСЏ РјР°СЃСЃРёРІРѕРј РёР· С‚СЂС‘С… С‚РѕС‡РµРє
     public class NelderMead {
         public List<Simplex> Steps { get; set; } = new List<Simplex>();
         public Point? Solution { get; set; }
@@ -21,11 +21,10 @@ namespace NELDER_MEAD {
         }
 
         public Result GetResult() {
-            int Count = 10;
             int uselessSteps = 0;
             Simplex step = InitialPoints;
 
-            while (Count > 0 && uselessSteps < 3) {
+            while (uselessSteps < 3) {
                 Point xReflection = step.Reflection();
                 if (xReflection.f() < step.Good.f()) {
                     Point xExpansion = step.Expansion();
@@ -42,7 +41,6 @@ namespace NELDER_MEAD {
                 }
                 step.Sort();
                 Steps.Add((Simplex)step.Clone());
-                Count--;
             }
             Solution = Steps.Last().Best;
             return new Result(Steps, Solution);
