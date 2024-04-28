@@ -10,6 +10,7 @@ const FUNCTION_MODULE = (function () {
   let n = x.length
   let m = y.length
 
+  // Значение функции в каждой точке графика для отрисовки контура
   let z = []
   for (let i = m - 1; i >= 0; i--) {
     for (let j = 0; j < n; j++) {

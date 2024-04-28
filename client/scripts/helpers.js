@@ -4,6 +4,13 @@ const HELPERS_MODULE = (function () {
     return response
   }
 
+  function setTooltipText(text) {
+    d3.select('#tooltip').text(text)
+  }
+  function setResultText(text) {
+    d3.select('#result').text(text)
+  }
+
   function orderSteps(steps) {
     const result = []
 
@@ -13,35 +20,33 @@ const HELPERS_MODULE = (function () {
 
     for (let i = 0; i < steps.length; i++) {
       const step = steps[i]
-      points = Object.values(step)
-      if (!points.map(JSON.stringify).includes(JSON.stringify(first))) {
-        first = points.find(
-          (point) =>
-            JSON.stringify(point) !== JSON.stringify(first) &&
-            JSON.stringify(point) !== JSON.stringify(second) &&
-            JSON.stringify(point) !== JSON.stringify(third)
-        )
-      } else if (!points.map(JSON.stringify).includes(JSON.stringify(second))) {
-        second = points.find(
-          (point) =>
-            JSON.stringify(point) !== JSON.stringify(first) &&
-            JSON.stringify(point) !== JSON.stringify(second) &&
-            JSON.stringify(point) !== JSON.stringify(third)
-        )
-      } else if (!points.map(JSON.stringify).includes(JSON.stringify(third))) {
-        third = points.find(
-          (point) =>
-            JSON.stringify(point) !== JSON.stringify(first) &&
-            JSON.stringify(point) !== JSON.stringify(second) &&
-            JSON.stringify(point) !== JSON.stringify(third)
-        )
+      let stepPoints = Object.values(step)
+      const changedPoint = stepPoints.find(
+        (point) => !areEqual(point, first) && !areEqual(point, second) && !areEqual(point, third)
+      )
+      if (!doPointsIncludePoint(stepPoints, first)) {
+        first = changedPoint
+      } else if (!doPointsIncludePoint(stepPoints, second)) {
+        second = changedPoint
+      } else if (!doPointsIncludePoint(stepPoints, third)) {
+        third = changedPoint
       }
       result.push([first, second, third])
     }
     return result
   }
 
+  function areEqual(point1, point2) {
+    return JSON.stringify(point2) === JSON.stringify(point1)
+  }
+
+  function doPointsIncludePoint(points, point) {
+    return points.map(JSON.stringify).includes(JSON.stringify(point))
+  }
+
   return {
     formatServerResponse,
+    setTooltipText,
+    setResultText,
   }
 })()
