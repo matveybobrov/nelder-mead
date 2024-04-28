@@ -24,7 +24,7 @@ namespace NELDER_MEAD {
             int uselessSteps = 0;
             Simplex step = InitialPoints;
 
-            while (uselessSteps < 3) {
+            while (uselessSteps < 10) {
                 Point xReflection = step.Reflection();
                 if (xReflection.f() < step.Good.f()) {
                     Point xExpansion = step.Expansion();
