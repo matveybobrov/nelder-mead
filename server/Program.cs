@@ -11,7 +11,7 @@ using System.Numerics;
 var builder = WebApplication.CreateBuilder();
 builder.Services.AddCors();
 var app = builder.Build();
-app.UseCors(builder => builder.AllowAnyOrigin());
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
 
 // Адрес сервера http://localhost:7022
 
@@ -20,10 +20,8 @@ app.MapGet("/", () => "Nelder-Mead");
 
 // При запросе к http://localhost:7022/result вернётся результат работы метода
 // На этот адрес делает запрос клиент при нажатии на кнопку calculate
-app.MapGet("/result", () => {
-    // В дальнейшем дадим возможность пользователю выбирать начальные точки на клиенте,
-    // как и начальную функцию
-    var initialPoints = new Simplex(new Point(0, 0), new Point(1, 0), new Point(0, 1));
+app.MapPost("/result", (Point[] points) => {
+    var initialPoints = new Simplex(points[0], points[1], points[2]);
 
     var result = new NelderMead(initialPoints).GetResult();
 
