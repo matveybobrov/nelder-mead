@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nelder-Mead</title>
-</head>
-<body>
-  <h1>Nelder-Mead</h1>
-  <div>f(x,y) = x<sup>2</sup>+xy+y<sup>2</sup>-6x-9y</div>
-  <button id="calculate-btn">calculate</button>
-  <div id="result-div">solution will be here</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nelder-mead</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <header title="hello" alt="hello">Метод Нелдера — Мида</header>
+    <div id="container">
+      <div id="description">
+        На графике изображена функция
+        <span id="func">f(x)=x<sup>2</sup>+xy+y<sup>2</sup>-6x-9y</span><br /><br />
+        Нажмите на произвольную точку на графике, чтобы увидеть работу алгоритма в действии.
+        Посредством операций отражения, растяжения и сжатия алгоритм придёт к точке, в которой
+        функция принимает минимальное значение. Ознакомиться с алгоритмом можно по
+        <a href="https://ru.wikipedia.org/wiki/Метод_Нелдера_—_Мида">ссылке</a><br /><br />
+        Более тёмные области на графике соотвествуют меньшим значениям функции
+      </div>
+      <div id="tooltips-container">
+        <div class="tooltip" id="tooltip">Выберите точку на графике</div>
+        <div class="tooltip" id="result">Решение будет здесь</div>
+      </div>
+      <div id="graph-container"></div>
+    </div>
 
-  <script src="./index.js"></script>
-</body>
+    <script src="./scripts/lib/d3.v7.min.js"></script>
+    <script src="./scripts/lib/d3-contour-v1-min.js"></script>
+    <script src="./scripts/sizes.js"></script>
+    <script src="./scripts/function.js"></script>
+    <script src="./scripts/api.js"></script>
+    <script src="./scripts/helpers.js"></script>
+    <script src="./scripts/graph.js"></script>
+    <script src="./index.js"></script>
+  </body>
 </html>
