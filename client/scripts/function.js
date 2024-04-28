@@ -4,7 +4,7 @@ const FUNCTION_MODULE = (function () {
   }
 
   let precision = 0.1
-  let x = d3.range(-10, 10, precision)
+  let x = d3.range(-9, 11, precision)
   let y = d3.range(-6, 14, precision)
 
   let n = x.length
