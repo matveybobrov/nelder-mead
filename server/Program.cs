@@ -17,6 +17,10 @@ app.UseDefaultFiles(new DefaultFilesOptions{
     DefaultFileNames = new List<string> { "index.html" },
     FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "../client"))
 });
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "../client"))
+});
 
 // При запросе к http://localhost:7022/result вернётся результат работы метода
 // На этот адрес делает запрос клиент при нажатии на кнопку calculate
