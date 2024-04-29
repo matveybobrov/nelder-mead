@@ -13,10 +13,9 @@ var builder = WebApplication.CreateBuilder();
 builder.Services.AddCors();
 var app = builder.Build();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "../client")),
-    RequestPath = "/client"
+app.UseDefaultFiles(new DefaultFilesOptions{
+    DefaultFileNames = new List<string> { "index.html" },
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "../client"))
 });
 
 // При запросе к http://localhost:7022/result вернётся результат работы метода

@@ -3,7 +3,7 @@
     "https": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:7022/client/index.html",
+      "launchUrl": "http://localhost:7022",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
