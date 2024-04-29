@@ -2,6 +2,7 @@ client/node_modules
 
 server/bin
 server/obj
+server/.vs
 server/TestResults
 serverTests/bin
 serverTests/obj
