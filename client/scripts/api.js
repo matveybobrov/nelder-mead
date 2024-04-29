@@ -1,6 +1,6 @@
 const API_MODULE = (function () {
   async function getServerResponse(initialSimplex) {
-    const response = await fetch('http://localhost:7022/result', {
+    const response = await fetch('/result', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
