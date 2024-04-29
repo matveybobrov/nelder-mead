@@ -1,7 +1,30 @@
 const FUNCTION_MODULE = (function () {
-  function func(x, y) {
-    return Math.pow(x, 2) + x * y + Math.pow(y, 2) - 6 * x - 9 * y
-  }
+  // Создание парсера строки в функцию с помощью библиотеки expr-eval
+  const Parser = exprEval.Parser
+  const parser = new Parser({
+    operators: {
+      // These default to true, but are included to be explicit
+      add: true,
+      concatenate: true,
+      conditional: true,
+      divide: true,
+      factorial: true,
+      multiply: true,
+      power: true,
+      remainder: true,
+      subtract: true,
+
+      // Disable and, or, not, <, ==, !=, etc.
+      logical: false,
+      comparison: false,
+
+      // Disable 'in' and = operators
+      in: false,
+      assignment: false,
+    },
+  })
+
+  let func = parser.parse('x^2+x*y+y^2-6*x-9*y').toJSFunction('x,y')
 
   let precision = 0.1
   let x = d3.range(-9, 11, precision)
